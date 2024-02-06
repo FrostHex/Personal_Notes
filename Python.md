@@ -1,0 +1,553 @@
+# Python基础用法
+各功能的 简单示例 & 基础注释，以便后续迅速查阅代码的表述方法。
+
+# 目录 (点击跳转)
+[输入输出](#输入输出)\
+[数学运算](#数学运算)\
+[数据类型](#数据类型)\
+[逻辑](#逻辑)\
+[序列](#序列)\
+[字典](#字典)\
+[循环](#循环)\
+[函数](#函数)\
+[引入模块](#引入模块)\
+[类](#类)\
+[异常处理](#异常)\
+[文件](#文件)\
+[终端运行](#终端运行)\
+[资源管理](#资源管理)
+
+
+# · 输入输出 <a id="输入输出"></a>
+### 打印合并
+``````
+print("Hello" + " World")
+``````
+``````
+输出：
+Hello World
+``````
+（字符串内有"或'推荐使用\\"或\\'转义）
+### 新一行自动换行
+``````
+print("""a
+b
+c""")
+``````
+``````
+输出：
+a
+b
+c
+``````
+### 输入
+``````
+age = input("请输入年龄")
+print("您输入的是" + user_age + "岁")
+``````
+（input一律返回字符串类型）
+
+
+# · 数学运算 <a id="数学运算"></a>
+``````
+a = 2**3 # 乘方
+b = 5//2 # 除完向下取整
+print(a,b)
+``````
+``````
+输出：
+8 2
+``````
+### 使用math库
+``````
+import math
+print(math.log2(8))
+``````
+``````
+输出：
+3.0
+``````
+
+# · 数据类型 <a id="数据类型"></a>
+### 布尔类型
+``````
+b1 = True
+b2 = False
+``````
+### 空值类型
+``````
+n = None
+``````
+### 求字符串长度
+``````
+print(len("Hello world!"))
+``````
+``````
+输出：
+12
+``````
+### 字符串变为大写
+``````
+s = "Hello"
+print(s.upper())
+print(s)
+``````
+``````
+输出：
+HELLO
+Hello
+``````
+（原字符串不会改变）
+### 用索引获取单个字符
+``````
+s = "Hello world!"
+print(s[0])
+print(s[11])
+print(s[len(s) - 2])
+``````
+``````
+输出：
+H
+!
+d
+``````
+### 用format构成字符串
+``````
+s = "姓名{1}，年龄{0}".format(age,name)
+``````
+``````
+s = "姓名{n}，年龄{a}".format(a=age,n=name)
+``````
+``````
+s = f"姓名{name}，年龄{age}"
+
+# 上三段代码等效
+``````
+``````
+age = 11.4514
+print("年龄{0:.2f}".format(age,name))
+
+# :.2f保留两位小数
+``````
+### 获得变量类型
+``````
+b1 = True
+n = None
+s = "Hello world!"
+print(type(b1))
+print(type(n))
+print(type(s))
+``````
+``````
+输出：
+<class 'bool'>
+<class 'NoneType'>
+<class 'str'>
+``````
+(list和tuple也是数据类型)
+### 类型转换
+``````
+a = int("666")
+print ("数量：" + str(2))
+``````
+
+
+# · 逻辑 <a id="逻辑"></a>
+### 条件
+``````
+if 0<1:
+    print("a")
+    if 1<2:
+        print("b")
+elif 3<4:
+    print("c")
+    print("d")
+else:
+    print("e")
+    print("f")
+``````
+（python会根据缩进判断语句属于哪个分支）
+### 与或非
+优先级：not > and > or
+
+
+# · 序列 sequence <a id="序列"></a>
+### 列表增添数据
+``````
+mylist = ["a","b"]
+mylist.append("c")
+mylist.append(6.6)
+mylist.append(True)
+print(mylist)
+``````
+``````
+输出：
+["a","b","c",6.6,True]
+``````
+（会更改原列表）\
+（列表可存不同类型的数据）
+### 列表删除数据
+``````
+mylist = ["a","b"]
+mylist.remove("b")
+``````
+### 元组 tuple
+``````
+mytuple = ("a","b")
+``````
+（其中元素不可变）
+### 顺序
+``````
+max(list) # 返回列表/元组的最大值
+min(list) # 返回列表/元组的最小值
+sorted(list) # 返回排序好的列表（纯数字列表是由小到大）
+``````
+（不改变原列表）
+### 元素数量
+``````
+list = ["a","b"]
+len(list)
+``````
+``````
+输出：
+2
+``````
+### 索引
+``````
+list = ["d","b"]
+list[0] = "a"
+``````
+
+# · 字典 <a id="字典"></a>
+``````
+z = {"小A":"137000","小B":"137001"}
+``````
+（{键:值}，键的类型不可变。比如列表list、字典dict是可变的就不能作为键；不可变的str、float、bool等就可以）
+### 增加键值对
+``````
+z["小C"] = "137002"
+``````
+（若存在同名的键则覆盖）
+### 字典查找
+``````
+z = {"小A":"137000","小B":"137001"}
+search = input("要查找的人：")
+if search in z:
+    print("号码是" + z[search])
+else:
+    print("查无此人")
+``````
+``````
+字典名.keys()   #返回所有键
+字典名.values() #返回所有值
+字典名.itesms() #返回所有键值
+``````
+
+
+# · 循环  <a id="循环"></a>
+### for
+``````
+for 变量名 in 可迭代对象 :
+    ...
+    ...
+``````
+（可迭代对象如列表、字典等）\
+（此变量会被依次赋值为可迭代对象中的每一个元素）
+``````
+z = {"小A":"137000","小B":"137001"}
+for name,code in z.item:
+    ...
+
+# 可迭代对象是键和值组成的元组，键赋给name，值赋给code
+``````
+``````
+z = {"小A":"137000","小B":"137001"}
+for tuple in z.item:
+    name = tuple[0]
+    code = tuple[1]
+    ...
+
+# 和上一段等效
+``````
+### range
+``````
+range(起始值,结束值,步长)
+``````
+（结束值不包含）
+``````
+for n in range(1,4,1):
+    print(n)
+``````
+``````
+输出：
+1
+2
+3
+``````
+``````
+for n in range(4):
+    print(n)
+
+# 步长不设默认为1，起始值也不设默认为0
+``````
+``````
+输出：
+0
+1
+2
+3
+``````
+### while
+``````
+while 条件:
+    ...
+``````
+``````
+n = 0
+while n<10:
+    n += 1
+``````
+
+
+# · 函数 <a id="函数"></a>
+``````
+# 定义函数，括号内传参，不设return则返回None
+def myfunction(a,b):
+    c = a + b
+    return c
+
+# 调用函数
+print(myfunction(10,15))
+``````
+
+
+# · 引入模块 <a id="引入模块"></a>
+``````
+import statistics
+print(statistics.median([19,-5,36]))
+print(statistics.mean([19,-5,36]))
+``````
+``````
+from statistics import median,mean
+print(median([19,-5,36]))
+print(mean([19,-5,36]))
+
+# 引入指定函数，使用时不需要加上模块名
+``````
+``````
+from statistics import *
+print(median([19,-5,36]))
+print(mean([19,-5,36]))
+
+# 引入全部函数，都不需要加上模块名
+# 自己定义函数注意避免重名
+``````
+（按Ctrl点函数名查看定义）
+### 使用第三方库
+``````
+在终端输入：
+pip install 库名
+
+之后在程序中import使用
+``````
+（pypi.org网站查找第三方库）
+
+
+# · 类 <a id="类"></a>
+``````
+class CatProfile:
+    def __init__(self):
+        self.name = "Mike"
+
+cat1 = CatProfile()
+print(cat1.name)
+``````
+``````
+输出：
+Mike
+``````
+（构造函数必须这样命名，第一个参数应命名为self用于表示对象自身）
+（调用时self不用手动传入）
+``````
+class Student:
+    def __init__(self,name,id):
+        self.name = name
+        self.id =id
+        self.grade ={"语文":0,"数学":0}
+    def set_grade(self,course,score):
+        if course in self.grade:
+            self.grade[course] = score
+
+a = Student("a","1001")
+b = Student("b","1002")
+b.set_grade("数学",95)
+print(b.grade)
+``````
+``````
+输出：
+{'语文': 0, '数学': 95}
+``````
+### 类继承
+``````
+# 父类
+class Mammal:
+    def __init__(self,name,sex):
+        self.name = name
+        self.sex = sex
+    def function1(self):
+        ...
+    def function2(self):
+        ...
+
+# 子类
+class Human(Mammal):
+    def __init__(self):
+        ...
+    def function3(self):
+        ....
+man = Human()
+# 在外面调用父类子类同名的函数时，会优先调子类定义的函数
+# 比如这里的__init__函数，按照子类定义就不包含name、sex参数
+
+
+# 子类
+class Cat(Mammal):
+    def __init__(self,name,sex):
+        super().__init__(name,sex)
+        ...
+    def function4(self):
+        ...
+kitty = Cat("Mike","Female")
+# 使用super返回当前父类，调用父类的构造函数
+# 这里的__init__函数使用父类定义，包含name、sex参数
+``````
+
+
+# · 异常处理 <a id="异常"></a>
+``````
+# 可能产生错误的代码
+try:
+    weight = float(input("体重："))
+    height = float(input("身高："))
+    BMI = weight / height ** 2
+
+# 产生值错误时运行
+except ValueError:
+    print("请输入数字")
+
+# 产生除0错误时运行
+except ZeroDivisionError:
+    print("身高不能为0")
+
+# 产生其他错误时运行
+except:
+    print("未知错误")
+
+# 没有错误时运行
+else:
+    print("BMI为:" + str(BMI))
+
+# 无论如何都会运行
+finally:
+    print("运行结束")
+``````
+
+
+# · 文件 <a id="文件"></a>
+### 打开文件
+``````
+a = open("D:/myfile.txt","r")
+
+# open函数返回文件对象
+# "r"为只读，"w"为只写，"a"为追加，"r+"为读和追加
+# "w"时若文件存在，会把原文件内容清空
+# "w"、"a"时若文件不存在，会新建文件
+``````
+``````
+a = open("D:/myfile.txt","r",encoding="utf-8")
+
+# 用utf-8编码读取文件
+``````
+### 关闭文件
+``````
+a = open("./data.txt")
+...
+...
+a.close()
+
+# 关闭文件，释放资源
+``````
+``````
+with open("./myfile.txt") as a:
+    ...
+    ...
+
+# 缩进内容执行完毕后自动关闭
+``````
+### 读取内容
+``````
+print(a.read())
+# read函数一次性读取文件内所有内容，返回字符串
+
+print(a.read())
+# 第一次read已读至结尾，再次执行read会返回空字符串
+``````
+``````
+a.read(10) # 读取10个字节的内容
+a.readline() # 读取一行的内容（根据换行符判断）
+a.readlines() # 读取全部内容，每行作为列表元素返回
+``````
+``````
+f = open("./poem.txt","r")
+print(f.readlines())
+``````
+``````
+输出：
+['举头望明月，\n','低头思故乡。\n']
+``````
+``````
+f = open("./poem.txt","r")
+lines = f.readlines()
+for line in lines:
+    print(line)
+``````
+``````
+输出：
+举头望明月，
+低头思故乡。
+``````
+### 写入内容
+``````
+with open("./data.txt","w") as f:
+    f.write("Hello\n")
+    f.write("World")
+``````
+
+
+# · 终端运行 <a id="终端运行"></a>
+### 终端传参
+``` python
+import sys
+
+...
+
+variable1 = sys.argv[1]
+variable2 = sys.argv[2]
+```
+
+
+# · 资源管理 <a id="资源管理"></a>
+### with
+with 语句是一种上下文管理器，用于简化资源管理（如文件操作、数据库连接等）的操作。它提供了一种清晰、简洁的方式来确保资源被正确地分配和释放，无论代码块中是否发生异常。
+
+通常，with 语句的基本语法如下：
+
+```
+with expression as variable:
+    # 在这里执行代码块，使用 variable 来引用 expression 的结果
+```
+
+其中：
+expression 是一个上下文管理器对象，它负责管理资源的分配和释放。
+variable 是一个变量名，用来引用 expression 的结果。
+使用 with 语句可以确保在代码块执行完毕后，expression 管理的资源会被正确地释放，即使在代码块执行过程中出现异常也不会影响资源的释放。这使得代码更加健壮和可读，同时减少了手动管理资源时可能引入的错误。
