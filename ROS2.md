@@ -1,4 +1,14 @@
-# ROS2 其他使用
+# Linux ROS2
+
+## 安装相关
+#### 安装.deb文件
+```
+sudo dpkg -i package-file-name.deb
+```
+修复依赖关系:
+```
+sudo apt install -f
+```
 
 ## 功能包
 #### 安装依赖

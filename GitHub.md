@@ -25,6 +25,12 @@ git rebase --continue
 ```
 
 
+## 关闭自动转换换行符
+```shell
+git config --global core.autocrlf false
+```
+
+
 ## 使用Commitizen进行提交
 1. Node.js 安装Node.js 和 npm (可用 PowerShell 验证是否安装成功)
     ```shell
@@ -36,8 +42,7 @@ git rebase --continue
 可用PowerShell输入 (其中Windows中的~/代表的是C:/Users/用户名/)
     ```shell
     npm install -g commitizen cz-conventional-changelog
-    echo '{ "path": "cz-customizable" }'> ~/.czrc
-    # 应将.czrc文件改为 utf-8 编码再继续下一步
+    '{ "path": "cz-customizable" }' | Out-File -FilePath "~/.czrc" -Encoding utf8
     npm i -g cz-customizable
     ```
 
