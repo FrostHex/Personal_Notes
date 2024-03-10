@@ -1,7 +1,8 @@
 # Linux ROS2
+--------------------------------------------------
 
-## 安装相关
-#### 安装.deb文件
+# 1. 安装相关
+## 1.1 安装.deb文件
 ```
 sudo dpkg -i package-file-name.deb
 ```
@@ -10,8 +11,8 @@ sudo dpkg -i package-file-name.deb
 sudo apt install -f
 ```
 
-## 功能包
-#### 安装依赖
+# 2. 功能包
+## 2.1 安装依赖
 
 ```
 cd ~/dev_ws/src
@@ -25,14 +26,14 @@ cd ~/dev_ws
 rosdepc install -i --from-path src --rosdistro humble -y
 ```
 
-#### 创建功能包
+## 2.2 创建功能包
 ```
 cd ~/dev_ws/src
 ros2 pkg create --build-type ament_cmake package_name    # C++
 ros2 pkg create --build-type ament_python package_name   # Python
 ```
 
-#### 编写程序
+## 2.3 编写程序
 ```python
 rclpy.spin(node)
     # 阻塞型循环，不断查看队列，若队列里有数据则进入回调函数处理
@@ -40,9 +41,7 @@ rclpy.spin_once(node)
     # 循环执行一次节点
 ```
 
-
-
-#### 构建功能包
+## 2.4 构建功能包
 
 排除某些功能包
 ```
@@ -67,12 +66,12 @@ entry_points={
         ...
 ```
 
-#### 运行程序
+## 2.5 运行程序
 ```
 ros2 run 功能包名 程序名
 ```
 
-##  话题
+# 3. 话题
 单向\
 .msg文件定义数据结构:
 ```msg
@@ -85,7 +84,7 @@ int32 y
 例如uint8[] xxx可表示数组
 ```
 
-##  服务
+# 4. 服务
 节点间的你问我答，双向。服务器唯一，客户端可不唯一\
 .srv文件定义数据结构:
 ```srv
@@ -98,18 +97,18 @@ int64 b
 int64 sum
 ```
 
-#### 查看接口数据结构在哪定义
+## 4.1 查看接口数据结构在哪定义
 ```
 ros2 service type /服务名
 ```
 
-#### 命令行请求服务器
+## 4.2 命令行请求服务器
 ```
 ros2 service type /服务名
 ```
 
 
-## 通信接口
+# 5. 通信接口
 标准消息类型存放处
 ```
 /opt/ros/humble/share/
@@ -151,7 +150,7 @@ from 功能包.其中某个文件夹 import 接口
 # from learning_interface.srv import GetObjectPosition
 ```
 
-## 动作
+# 6. 动作
 完整行为的流程管理，一直有反馈，就像有进度条，可以把控进度
 
 .action文件定义数据结构:
@@ -182,16 +181,24 @@ ros2 action send_goal /动作名 动作数据结构  "变量: 数值"
 
 
 
----
-## Robocup无人机仿真 (ROS1 Melodic)
 
-#### 强行关闭gazebo所有进程
+
+
+
+
+
+
+--------------------------------------------------
+--------------------------------------------------
+# Robocup无人机仿真 (ROS1 Melodic)
+
+## 强行关闭gazebo所有进程
 ```
 killall -9 gzclient
 killall -9 gzserver
 ```
 
-#### 用键盘控制无人机飞行
+## 用键盘控制无人机飞行
 
 ```
 cd ~/PX4_Firmware

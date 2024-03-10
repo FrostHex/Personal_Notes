@@ -1,15 +1,18 @@
-## 特性
+# Arduino
+--------------------------------------------------
+
+# 1. 特性
 HIGH 等于 1 \
 LOW 等于 0
 
-## 界面
-#### 直观显示
+# 2. 界面
+## 2.1 直观显示
 Tools -> Serial Monitor (可获取Serial.println打印的信息)
 Tools -> Serial Plotter (绘制 随时间变化的量 的图表)
 
 
-## 示例
-#### 电位器
+# 3. 示例
+## 3.1 电位器
 ```c++
 // the setup routine runs once when you press reset:
 void setup() {
@@ -26,7 +29,7 @@ void loop() {
   delay(1);  // delay in between reads for stability
 }
 ```
-#### 电位器控制LED
+## 3.2 电位器控制LED
 ```c++
 // get it form the potentiometer, [0,1023]
 sensorValue = analogRead(analogInPin);
@@ -38,7 +41,7 @@ outputValue = map(sensorValue, 0, 1023, 0, 255);
 analogWrite(analogOutPin, outputValue);
 ```
 
-#### 将PWM方波输出转为连续的模拟电压
+## 3.3 将PWM方波输出转为连续的模拟电压
 ![简易RC低通滤波]
 
 

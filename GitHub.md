@@ -1,19 +1,20 @@
 # GitHub
+--------------------------------------------------
 
-## Git For Windows 配置
+# 1. Git For Windows 配置
 ```
 git config --global user.name "用户名"
 git config --global user.email "邮箱@aaa.com"
 ```
 
 
-## 网络问题
+# 2. 网络问题
 ```shell
 git config --global http.proxy http://127.0.0.1:7890
 ```
 
 
-## 修改提交历史的作者
+# 3. 修改提交历史的作者
 ```shell
 git log --oneline
 
@@ -25,13 +26,14 @@ git rebase --continue
 ```
 
 
-## 关闭自动转换换行符
+# 4. 关闭自动转换换行符
 ```shell
 git config --global core.autocrlf false
 ```
 
 
-## 使用Commitizen进行提交
+# 5. 使用Commitizen进行提交
+## 5.1 配置
 1. Node.js 安装Node.js 和 npm (可用 PowerShell 验证是否安装成功)
     ```shell
     node -v
@@ -190,7 +192,7 @@ git config --global core.autocrlf false
     ( 其中66行后的代码都是模板，可仿照其格式做出修改，在不同的工程配置不同的commit格式 )
 
 
-##### 使用GitBash的提交方式
+## 5.2 使用GitBash的提交方式
 1. 添加文件，如 `git add .` 
 2. `winpty git cz`（使用 GitBash 需要用 winpty 保证窗口的交互功能）
 3. 使用方向键上下选择commit类型，回车

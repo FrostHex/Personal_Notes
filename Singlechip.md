@@ -1,7 +1,8 @@
 # 单片机
+--------------------------------------------------
 
-## 时钟
-#### APB1 peripheral clocks 和 Timer clocks：
+# 1. 时钟
+## APB1 peripheral clocks 和 Timer clocks：
 - APB1 Peripheral Clocks（APB1外设时钟）：
    - APB1 Peripheral Clocks 是系统总线上的一个时钟域，它提供了对一系列外设（如串口、SPI、I2C等）的时钟信号。
    - 这个时钟域的频率通常由系统时钟源（一般是HSI、HSE、PLL等）分频得到，因此它的频率不同于主时钟（SYSCLK）。
@@ -16,8 +17,8 @@ APB1 Peripheral Clocks 是供一系列外设使用的时钟信号，而Timer Clo
 
 
 
-## Cmakelists
-#### 构建类型
+# 2. Cmakelists
+## 构建类型
 构建类型用来指定编译器的优化级别和调试信息的生成。不同的构建类型会影响程序的性能和可调试性。
 
 相比debug模式，release模式的不同点在于：
