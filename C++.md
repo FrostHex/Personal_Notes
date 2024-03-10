@@ -287,7 +287,6 @@ int main() {
 ```
 
 
-
 --------------------------------------------------
 --------------------------------------------------
 # 3. 多线程
@@ -353,4 +352,181 @@ int main() {
 ```cpp
 #include <atomic>
 std::atomic<int> flag(0); // 将flag声明为原子类型，初始值0
+```
+
+
+--------------------------------------------------
+--------------------------------------------------
+# 4. 顺序容器
+## 4.1 vector 示例
+vector可在运行时动态地添加或删除元素
+```cpp
+// 声明和初始化
+#include <vector>
+#include <iostream>
+int main() {
+    // 声明一个空的 vector
+    std::vector<int> vec1;
+    // 创建并初始化一个 vector
+    std::vector<int> vec2 = {1, 2, 3, 4, 5};
+    return 0;
+}
+
+// 访问元素
+std::cout << vec2[0]; // 输出：1
+std::cout << vec2.at(2); // 输出：3
+
+// 向尾部添加元素
+vec1.push_back(10);
+
+// 从尾部删除元素
+vec2.pop_back();
+
+// 获取元素数量
+std::cout << vec2.size(); // 输出：4
+```
+
+## 4.2 常见操作
+- `push_back()`：向尾部添加一个元素。
+- `pop_back()`：从尾部删除一个元素。
+- `size()`：返回元素的数量。
+- `empty()`：判断是否为空。
+- `clear()`：清空所有元素。
+- `resize()`：重新调整大小。
+- `insert()`：在指定位置插入一个或多个元素。
+- `erase()`：删除指定位置或者指定范围内的元素。
+
+## 4.3 迭代器
+用来访问容器中的元素。在对容器进行插入或删除操作后，迭代器可能会失效。
+
+```cpp
+// 获取迭代器
+std::vector<int> vec = {1, 2, 3, 4, 5};
+auto it_begin = vec.begin(); // 指向 第一个元素 的迭代器
+auto it_end = vec.end();     // 指向 最后一个元素的下一个位置 的迭代器
+
+// 遍历元素
+for (auto it = vec.begin(); it != vec.end(); ++it) {
+    std::cout << *it << " ";   // *it 解引用迭代器，访问当前迭代器指向的元素
+}
+
+// 遍历元素 (范围-based for循环) (foreach 循环)
+for (int element : vec) {   // 每次迭代时，容器 vec 中元素的拷贝到 element
+    std::cout << element << " ";
+}
+
+// 移动迭代器
+++it; // 将迭代器向后移动一个位置
+--it; // 将迭代器向前移动一个位置
+
+// 比较迭代器 (在容器中的位置)
+std::vector<int>::iterator it1 = vec.begin();
+std::vector<int>::iterator it2 = vec.end();
+bool isEqual = (it1 == it2);
+bool isLess = (it1 < it2); // it1靠前，返回true
+```
+
+```cpp
+// 用 -> 访问迭代器指向的元素的成员（通常用于指向对象的迭代器）
+#include <iostream>
+#include <vector>
+
+struct Foo {
+    int value;
+    Foo(int v) : value(v) {} 
+    // 构造函数 Foo
+    // : value(v) 是成员初始化列表，传入的整数参数 v 用于初始化成员变量 value
+};
+
+int main() {
+    std::vector<Foo> foos = { {1}, {2}, {3} }; // {1}, {2}, {3} 为三个Foo类型的对象
+    auto it = foos.begin(); // it 指向容器中第一个元素 {1} 的位置
+    std::cout << it->value << std::endl; // 输出迭代器所指向的元素的 value 成员，即输出 1
+    return 0;
+}
+```
+
+
+--------------------------------------------------
+--------------------------------------------------
+# 5. 泛型算法
+可以用于不同数据类型的算法
+
+## 示例
+```cpp
+// std::sort 排序
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {4, 2, 5, 1, 3};
+    std::sort(numbers.begin(), numbers.end()); // 排序，接受两个迭代器参数表示排序的范围
+    for (int num : numbers) {
+        std::cout << num << " "; // 输出排序后的数组 1 2 3 4 5
+    }
+    std::cout << std::endl; // 输出换行符
+    return 0;
+}
+```
+## 常见的泛型算法
+- **排序算法**：如 `std::sort`、`std::stable_sort`。
+- **查找算法**：如 `std::find`、`std::binary_search`、`std::count_if`。
+- **算术算法**：如 `std::accumulate`、`std::inner_product`、`std::transform`。
+- **集合操作算法**：如 `std::merge`、`std::set_union`、`std::set_intersection`。
+- **堆操作算法**：如 `std::make_heap`、`std::push_heap`、`std::pop_heap`。
+- **遍历和修改算法**：如 `std::for_each`、`std::transform`、`std::replace`。
+
+
+--------------------------------------------------
+--------------------------------------------------
+# 6. 动态内存 (智能指针)
+智能指针 可自动化管理内存的功能
+
+## 6.1 std::unique_ptr
+- 一种独占式智能指针，它确保了在任何时候只有一个指针可以管理给定的资源。
+- 离开作用域时，它所管理的资源会被自动释放。
+- 不能被拷贝，但可以通过移动语义来转移所有权。
+
+## 6.2 std::shared_ptr
+- 共享式智能指针，资源可以被多个指针共享。
+- 内部使用引用计数来跟踪共享的资源，当引用计数为零时，资源会被释放。
+- 支持拷贝构造和赋值操作，会增加引用计数。
+
+## 6.2 std::weak_ptr
+- 也是共享式智能指针，但它不会增加资源的引用计数。
+- `std::weak_ptr` 可以从 `std::shared_ptr` 构造而来，用于解决 `std::shared_ptr` 的循环引用问题。
+- `std::weak_ptr` 可以通过 `lock()` 方法获取一个指向资源的 `std::shared_ptr`，但在获取之前需要检查资源是否还存在，因为资源可能已经被释放。
+```cpp
+// 解决ab循环引用
+#include <memory>
+
+class B;  // 前置声明
+
+class A {
+public:
+    std::shared_ptr<B> b_ptr;
+};
+
+class B {
+public:
+    std::weak_ptr<A> a_weak_ptr; // 若 std::shared_ptr<A> a_ptr; 则会循环引用, 引用计数无法归零. 内存泄漏
+};
+
+int main() {
+    std::shared_ptr<A> a = std::make_shared<A>();
+    std::shared_ptr<B> b = std::make_shared<B>();
+
+    a->b_ptr = b;
+    b->a_weak_ptr = a;
+
+    // 在需要访问 a 所指向的资源时，先通过 lock() 方法获取一个指向资源的 shared_ptr (若资源不存在则返回空的 std::shared_ptr)
+    if (auto locked_a = b->a_weak_ptr.lock()) {
+        // 使用 locked_a 访问资源
+    } else {
+        // a 已经被释放了，处理资源不存在的情况
+    }
+
+    return 0;
+}
 ```

@@ -11,6 +11,12 @@ sudo dpkg -i package-file-name.deb
 sudo apt install -f
 ```
 
+## 1.2 便捷启动程序
+例如，Groot2软件的安装位置是`~/dev_ws/Groot2/bin/groot2`，每次都需要cd进这个目录，用`./groot2`命令来启动程序。**为了能打开终端后在任何位置都可以用`groot2`命令直接启动这个程序**：
+1. 在 `.bashrc` 文件内添加一行 `export PATH="$PATH:~/dev_ws/Groot2/bin"`
+2. 终端内运行命令`source ~/.bashrc`
+
+
 # 2. 功能包
 ## 2.1 安装依赖
 
