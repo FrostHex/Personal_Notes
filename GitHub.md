@@ -43,7 +43,8 @@ git config --global user.email "邮箱@aaa.com"
 
 ## 2.2 网络问题
 ```shell
-git config --global http.proxy http://127.0.0.1:7890
+git config --global http.proxy 127.0.0.1:7890
+git config --global https.proxy 127.0.0.1:7890
 ```
 
 ## 2.3 关闭自动转换换行符
@@ -79,14 +80,14 @@ git branch
 git branch -d 分支名
 # 删除某分支 (此前自己要在其他分支) (强制删除为 -D)
 
+git push 远程仓库名 -d 分支名
+# 删除远程仓库的某分支
+
 git push 远程仓库名 分支名
 # 将本地仓库的提交推到远程仓库。origin是一般程仓库的默次名称
 
 git push 远程仓库名 分支名 -f
 # 强利将本他外支推送到远程仓库,会覆盖远程分支的历史
-
-git push 远程仓库名 --delete 分支名
-# 删除Git包库的某一个支
 
 git pull 远程仓库名 分支名
 # 拉取远程仓库的最新代码到本地
@@ -111,6 +112,15 @@ git rebase 远程仓库名 分支名
 
 git rm -r --cached 文件名或文件夹名
 # 已提交的文件会被纳入版本控制, 再加在 .gitignore 里会不生效。需要用此命令移除对其的版本控制
+
+git reset --hard origin/main
+# 直接回滚, 放弃所有本地未提交的更改
+
+git reset --hard 某一次提交的哈希值
+# 直接回滚倒某一次提交
+
+git config --global http.postBuffer 157286400
+# 增加 Git 缓冲区大小: Git push failing HTTP 500 curl 22 The requested URL returned error: 500 Internal Server Error
 ```
 
 
@@ -127,7 +137,14 @@ git commit -m "这次提交的注释"
 git push origin 主分支名你   # 比如 main 或 master
 ```
 
-## 4.2 修改提交历史
+## 4.2 修改最近的一条提交历史
+```shell
+git commit --amend
+# 修改提交信息
+git push origin main -f
+``` 
+
+## 4.3 修改提交历史
 ```shell
 git log --oneline
 
@@ -145,6 +162,47 @@ git push origin main -f
 ```
 ![Git修改提交历史合并]
 当使用 squash 合并时, 上面的算 previous, 应该把靠下的commit前面的pick替换为s
+
+## 4.4 用 Git LFS跟踪大文件
+```shell
+# 安装LFS:
+git lfs install 
+
+# 查找超过100M的文件:
+find ./ -type f -size +102400k 
+
+# 用LFS跟踪大文件:
+git lfs track “文件名”
+```
+```shell
+# 查看当前LFS跟踪的文件或目录:
+git lfs track
+
+# 取消所有已跟踪的文件:
+git lfs untrack "*"
+
+# 删除未被当前分支使用的LFS对象:
+git lfs prune
+```
+
+
+## 4.5 将main分支的新commit同步到dev分支
+```shell
+git checkout dev
+git fetch origin
+git checkout main
+git pull origin main
+git checkout dev
+git rebase main
+
+  # 合并冲突
+  git status
+  修改文件中冲突的内容
+  git add 冲突的文件
+  git rebase --continue
+
+git push origin dev
+```
 
 
 --------------------------------------------------

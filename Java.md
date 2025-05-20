@@ -130,7 +130,7 @@ public protected default private
 1. Private (类访问级别) : 表示私有的, 被private修饰的成员, 仅能包含该类的其他成员访问, 任何其他类都不能访问, 即private成员只能在类的内部使用。
 2. Default (包访问级别) : 如果一个类或类的成员不使用任何访问控制修饰符, 则称它为默认访问控制级别, 这个类或类的成员只能被本包中的其他类访问。
 3. Protected (子类访问级别) : 被protected修饰的类的成员, 既可以被同一个包中其他类访问, 也可以被不同包中的子类访问。protected比默认访问权限的访问范围要宽。 (protected=默认权限+不同包中的子类) 
-4. public (公共访问级别) : 是最宽松的访问级别权限, 如果一个类或者类的成员被public访问控制符修饰, 那么这个类或者类的成员能被所有的类访问, 不管访问类和被访问类是否在同一个包中。
+4. Public (公共访问级别) : 是最宽松的访问级别权限, 如果一个类或者类的成员被public访问控制符修饰, 那么这个类或者类的成员能被所有的类访问, 不管访问类和被访问类是否在同一个包中。
 
 
 --------------------------------------------------
@@ -336,13 +336,21 @@ Creature aCreature = new Rabbit();   // also valid
 ```
 
 ## 12.4 Abstract Class
-abstract class cannnot be instantiated
+- abstract class cannnot be instantiated
+- abstract class can contain abstract methods as well as implemented methods
 ```java
-public abstract class Creature(){   // abstract class
-    // ...
+public abstract class Creature()
+{   
+    abstract void make_sound(); // abstract method(without the implementation (or method body))
+
+    void sleep() // implemented method
+    {
+        System.out.println("Sleeping");
+    }
 }
 
-public class Turtle extends Creature{
+public class Turtle extends Creature
+{
     // ...
 }
 
@@ -471,6 +479,9 @@ interface Child extends Father, Mother
 - If Father interface and Mother interface have the same variables:
   - ok, use Father.variable or Mother.variable to refer one of them
 
+## 14.4 Choosing Interface or Abstract Class
+- If (almost) all classes implementing the behavior would have the same code, then we can use an abstract class to implement it.
+- The key is to avoid code duplication.
 
 --------------------------------------------------
 --------------------------------------------------
