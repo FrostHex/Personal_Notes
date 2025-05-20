@@ -18,6 +18,12 @@ sudo apt install -f
 2. 终端内运行命令`source ~/.bashrc`
 
 
+# 1.3 删除用户密码
+```shell
+sudo passwd -d 用户名
+``` 
+
+
 --------------------------------------------------
 --------------------------------------------------
 # 2. 终端基础命令
@@ -356,6 +362,29 @@ rclcpp::Service<my_service>::SharedPtr service =
 
 
 
+
+--------------------------------------------------
+--------------------------------------------------
+# Raspberry Pi 下的 Python 工程
+## 虚拟环境下缺失 Raspbot_Lib 依赖
+``` shell
+# 进入虚拟环境，例如/home/pi/WorkSpace/env
+
+# (env) pi@yahboom:~/py_install $ ls
+# build dist Raspbot_Lib Raspbot_Lib.egg-info README.md setup.py
+
+# (env) pi@yahboom:~/py_install $ whereis python3
+# python3: ...   /home/pi/WorkSpace/env/bin/python3   ...
+
+cd ~/py_install
+sudo /home/pi/WorkSpace/env/bin/python3 setup.py install
+```
+
+## 虚拟环境下使用gpio
+```shell
+# 去官网查文档
+pip install rpi-lgpio
+```
 
 
 
