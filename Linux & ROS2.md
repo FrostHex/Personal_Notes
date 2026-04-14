@@ -24,6 +24,35 @@ sudo passwd -d 用户名
 ``` 
 
 
+# 1.4 设置代理
+在.bashrc文件内添加: 
+```shell
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+```
+在外部终端运行: 
+```shell
+source ~/.bashrc
+```
+
+
+## 1.5 设置WSL代理
+在.bashrc文件内添加: 
+```shell
+host_ip=$(ip route | awk '/default/ {print $3}')
+export http_proxy="http://$host_ip:7890"
+export https_proxy="http://$host_ip:7890"
+```
+在外部终端运行: 
+```shell
+source ~/.bashrc
+```
+验证: 
+```shell
+curl www.google.com
+```
+
+
 --------------------------------------------------
 --------------------------------------------------
 # 2. 终端基础命令

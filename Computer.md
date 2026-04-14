@@ -80,6 +80,16 @@ C:\Users\Frost\AppData\Roaming\Code\User\settings.json
 ## 6.1 PowerToys 窗口置顶
 Win+ Ctrl + T
 
+## 6.2 格式化SD卡至FAT32
+1. Win + R, cmd
+2. 对于SD卡盘符X, 输入 format /FS:FAT32 X:
+
+## 6.3 装机跳过联网
+- Shift + F10
+- oobe\bypassnro
+
+## 6.4 终端从c盘切换到d盘
+- d:
 
 --------------------------------------------------
 --------------------------------------------------
